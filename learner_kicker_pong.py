@@ -20,7 +20,6 @@ def discount_rewards(rewards, gamma=0.98):
 def main():
     # Configure Settings
     total_episodes = 150000
-    total_steps_max = 10000
     epsilon_stop = 100000
     train_frequency = 1
     plot_frequency = 10
