@@ -1,6 +1,6 @@
 import math
 
-from kicker_simulation.CONST_BALL import Coordinate
+from kicker_pong.CONST_BALL import Coordinate
 
 
 class HumanStrategy:

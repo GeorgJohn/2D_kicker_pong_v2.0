@@ -1,6 +1,6 @@
 import pygame
-from kicker_simulation.CONST_VIEW import *
-from kicker_simulation.CONST_BALL import Coordinate
+from kicker_pong.CONST_VIEW import *
+from kicker_pong.CONST_BALL import Coordinate
 
 
 class View:
@@ -172,9 +172,9 @@ class View:
         self.display_court_line()
         self.display_info()
         self.display_ball(kicker.ball)
-        self.display_gamer_bars(keeper=True, defender=True)
+        self.display_gamer_bars(keeper=True)
         self.display_human_figures(hum_keeper=kicker.human_keeper)
-        self.display_computer_figures(com_keeper=kicker.computer_keeper, com_defender=kicker.computer_defender)
+        self.display_computer_figures(com_keeper=kicker.computer_keeper)
         # self.display_human_figures(hum_keeper=my_human_keeper, hum_defender=my_human_defender)
         # self.display_computer_figures(com_keeper=my_computer_keeper, com_defender=my_computer_defender)
         self.display_goal()

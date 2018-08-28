@@ -1,13 +1,13 @@
 import pygame
 import random
 
-from kicker_simulation.CONST_SIMULATION import *
-from kicker_simulation.CONST_KICKER import *
+from kicker_pong.CONST_SIMULATION import *
+from kicker_pong.CONST_KICKER import *
 
-from kicker_simulation.model_environment import Environment
-from kicker_simulation.view_game import View
-from kicker_simulation.model_kicker import Kicker
-from kicker_simulation.control_human_automatic_strategy import HumanStrategy
+from kicker_pong.model_environment import Environment
+from kicker_pong.view_game import View
+from kicker_pong.model_kicker import Kicker
+from kicker_pong.control_human_automatic_strategy import HumanStrategy
 
 # KEEPER_START_POS = MAX_POS_KEEPER / 2
 BALL_START_POS_X = COURT_WIDTH / 2
@@ -20,13 +20,7 @@ TIME_STEP = 1 / 60
 class Action(IntEnum):
     UP_KEEPER = 0
     DOWN_KEEPER = 1
-
-    UP_DEFENDER = 2
-    DOWN_DEFENDER = 3
-
-    NOOP_DEFENDER_KEEPER = 4
-    UP_DEFENDER_KEEPER = 5
-    DOWN_DEFENDER_KEEPER = 6
+    NOOP_KEEPER = 2
 
 
 class ActionHandler:
@@ -37,25 +31,10 @@ class ActionHandler:
     def move_bar(self, action):
         if action == Action.UP_KEEPER:
             self.move_up_keeper()
-            self.no_move_defender()
         elif action == Action.DOWN_KEEPER:
             self.move_down_keeper()
-            self.no_move_defender()
-        elif action == Action.UP_DEFENDER:
-            self.move_up_defender()
-            self.no_move_keeper()
-        elif action == Action.DOWN_DEFENDER:
-            self.move_down_defender()
-            self.no_move_keeper()
         elif action == Action.NOOP_DEFENDER_KEEPER:
             self.no_move_keeper()
-            self.no_move_defender()
-        elif action == Action.UP_DEFENDER_KEEPER:
-            self.move_up_keeper()
-            self.move_up_defender()
-        elif action == Action.DOWN_DEFENDER_KEEPER:
-            self.move_down_keeper()
-            self.move_down_defender()
         else:
             print("undefined action !!!")
 
@@ -71,19 +50,6 @@ class ActionHandler:
 
     def no_move_keeper(self):
         self.kicker.computer_keeper.next_position = -1
-
-    def move_up_defender(self):
-        self.kicker.computer_defender.next_position = \
-            self.kicker.computer_defender.position - (BAR_SPEED * SIMULATION_TIME_STEP)
-        self.kicker.computer_defender.move_bar()
-
-    def move_down_defender(self):
-        self.kicker.computer_defender.next_position = \
-            self.kicker.computer_defender.position + (BAR_SPEED * SIMULATION_TIME_STEP)
-        self.kicker.computer_defender.move_bar()
-
-    def no_move_defender(self):
-        self.kicker.computer_defender.next_position = -1
 
 
 class EnvironmentController:
@@ -104,7 +70,7 @@ class EnvironmentController:
             self.env.set_old_score([0, 0])
 
         self.kicker.computer_keeper.reset_bar()
-        self.kicker.computer_defender.reset_bar()
+        # self.kicker.computer_defender.reset_bar()
         # self.kicker.computer_keeper.position = random.randint(0, MAX_POS_KEEPER)
         # self.kicker.computer_defender.position = random.randint(0, MAX_POS_DEFENDER)
         self.kicker.human_keeper.reset_bar()

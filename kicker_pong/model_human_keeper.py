@@ -1,19 +1,19 @@
 import math
 
-from kicker_simulation.model_game_bar import GameBar
-from kicker_simulation.CONST_GAME_FIGURES import *
-from kicker_simulation.CONST_BALL import Coordinate
-from kicker_simulation.CONST_SIMULATION import SIMULATION_TIME_STEP
-from kicker_simulation.CONST_SIMULATION import SHOOT_SPEED
-from kicker_simulation.CONST_SIMULATION import BAR_SPEED
+from kicker_pong.model_game_bar import GameBar
+from kicker_pong.CONST_GAME_FIGURES import *
+from kicker_pong.CONST_BALL import Coordinate
+from kicker_pong.CONST_SIMULATION import SIMULATION_TIME_STEP
+from kicker_pong.CONST_SIMULATION import SHOOT_SPEED
+from kicker_pong.CONST_SIMULATION import BAR_SPEED
 
 
 class HumanKeeper(GameBar):
     """Klassenkonstanten"""
     NUMBER_OF_FIGURES = 1
     DISTANCE_FIGURES = 0
-    MAX_POS_KEEPER = 242
-    POSITION_ON_BAR = 219
+    MAX_POS_KEEPER = 580
+    POSITION_ON_BAR = 50
     ABS_X_POSITION = COURT_WIDTH - BAR_POSITION_KEEPER
     X_REFLECTION_PLANE = COURT_WIDTH - BAR_POSITION_KEEPER - FIGURE_FOOT_WIDTH - BALL_RADIUS
     X_OFFSET_REFLECTION_PLANE = FIGURE_FOOT_WIDTH + BALL_RADIUS

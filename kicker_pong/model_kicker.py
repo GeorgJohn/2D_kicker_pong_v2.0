@@ -1,12 +1,11 @@
 import math
 
-from kicker_simulation.CONST_BALL import *
-from kicker_simulation.CONST_KICKER import *
-from kicker_simulation.CONST_SIMULATION import *
-from kicker_simulation import model_ball
-from kicker_simulation import model_human_keeper
-from kicker_simulation import model_computer_keeper
-from kicker_simulation import model_computer_defender
+from kicker_pong.CONST_BALL import *
+from kicker_pong.CONST_KICKER import *
+from kicker_pong.CONST_SIMULATION import *
+from kicker_pong import model_ball
+from kicker_pong import model_human_keeper
+from kicker_pong import model_computer_keeper
 
 
 class Kicker:
@@ -25,7 +24,6 @@ class Kicker:
         self.ball.kick_off()
         self.human_keeper = model_human_keeper.HumanKeeper()
         self.computer_keeper = model_computer_keeper.ComputerKeeper()
-        self.computer_defender = model_computer_defender.ComputerDefender()
         self.score = [0, 0]
         self.ball_in_goal_area = False
         self.terminal_state = False
@@ -35,7 +33,6 @@ class Kicker:
         self.ball.move()
         self.human_keeper.check_for_interaction(self)
         self.computer_keeper.check_for_interaction(self)
-        self.computer_defender.check_for_interaction(self)
 
         self.ball.update_angle()
 
