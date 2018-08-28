@@ -26,8 +26,8 @@ class Observation:
         standardize_computer_keeper_pos = kicker.computer_keeper.position / MAX_POS_KEEPER
         standardize_human_gamer_pos = kicker.human_keeper.position / MAX_POS_KEEPER
 
-        self._state = [kicker.get_score(), standardize_x_pos, standardize_y_pos, standardize_speed,
-                       standardize_angle, standardize_computer_keeper_pos, standardize_human_gamer_pos]
+        self._state = [standardize_x_pos, standardize_y_pos, standardize_speed, standardize_angle,
+                       standardize_computer_keeper_pos, standardize_human_gamer_pos]
 
         self._state_buffer.append(self._state)
 
@@ -37,24 +37,23 @@ class Observation:
 
         self._score = kicker.get_score()
 
-    def update(self, kicker):
-        x_pos = kicker.ball.pos[Coordinate.X]
-        y_pos = kicker.ball.pos[Coordinate.Y]
+    # def update(self, kicker):
+    #     x_pos = kicker.ball.pos[Coordinate.X]
+    #     y_pos = kicker.ball.pos[Coordinate.Y]
+    #
+    #     speed = kicker.ball.speed
+    #     angle = kicker.ball.angle
+    #
+    #     computer_keeper_pos = kicker.computer_keeper.position
+    #     computer_defender_pos = kicker.computer_defender.position
+    #     human_gamer_pos = kicker.human_keeper.position
+    #
+    #     self._state = [x_pos, y_pos, speed, angle, computer_keeper_pos, computer_defender_pos, human_gamer_pos]
 
-        speed = kicker.ball.speed
-        angle = kicker.ball.angle
-
-        computer_keeper_pos = kicker.computer_keeper.position
-        computer_defender_pos = kicker.computer_defender.position
-        human_gamer_pos = kicker.human_keeper.position
-
-        self._state = [kicker.get_score(), x_pos, y_pos, speed, angle,
-                       computer_keeper_pos, computer_defender_pos, human_gamer_pos]
-
-        # new_x_pos = ball.get_x_position() + math.cos(ball.get_angle()) * ball.get_speed()
-        # new_y_pos = ball.get_y_position() + math.sin(ball.get_angle()) * ball.get_speed()
-        # self._state = [kicker.get_score(), ball.get_x_position(), ball.get_y_position(), new_x_pos, new_y_pos,
-        #                computer_gamer.get_position()]
+        # # new_x_pos = ball.get_x_position() + math.cos(ball.get_angle()) * ball.get_speed()
+        # # new_y_pos = ball.get_y_position() + math.sin(ball.get_angle()) * ball.get_speed()
+        # # self._state = [kicker.get_score(), ball.get_x_position(), ball.get_y_position(), new_x_pos, new_y_pos,
+        # #                computer_gamer.get_position()]
 
     def get_state(self):
         state = []
@@ -86,10 +85,10 @@ class Environment(Observation):
             human_diff = self._score[0] - self.__old_score[0]
             computer_diff = self._score[1] - self.__old_score[1]
             if human_diff != 0:
-                self.__reward = -4
+                self.__reward = -1
             elif computer_diff != 0:
                 self.__human_goal_counter += 1
-                self.__reward = 4
+                self.__reward = 1
 
             self.set_old_score(self._score)
         else:
@@ -124,4 +123,3 @@ class Environment(Observation):
 
     def set_goal_counter(self, count):
         self.__human_goal_counter = count
-
