@@ -33,7 +33,7 @@ class ActionHandler:
             self.move_up_keeper()
         elif action == Action.DOWN_KEEPER:
             self.move_down_keeper()
-        elif action == Action.NOOP_DEFENDER_KEEPER:
+        elif action == Action.NOOP_KEEPER:
             self.no_move_keeper()
         else:
             print("undefined action !!!")
@@ -74,7 +74,8 @@ class EnvironmentController:
         # self.kicker.computer_keeper.position = random.randint(0, MAX_POS_KEEPER)
         # self.kicker.computer_defender.position = random.randint(0, MAX_POS_DEFENDER)
         self.kicker.human_keeper.reset_bar()
-        self.env.update_std(self.kicker)
+        for k in range(Environment.MAX_LEN_BUFFER):
+            self.env.update_std(self.kicker)
         self.env.set_reward(0)
         return [self.env.get_observation(), self.env.get_reward(), self.env.get_done()]
 
