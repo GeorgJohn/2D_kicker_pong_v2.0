@@ -23,12 +23,11 @@ def main():
         agent.session.run(tf.global_variables_initializer())
 
         agent.saver.restore(agent.session,
-                            "/home/prock/models/___reinforce_kicker_pong_epsilon_greedy_annealed_0.25->0.001.ckpt")
+                            "/home/johnson/train_data/models/"
+                            "reinforce_with_baseline_kicker_pong_v2_epsilon_greedy_annealed_0.25-_0.001.ckpt")
         print("Model restored.")
 
         state, _, _ = env.reset()
-        state = state
-        print(state)
 
         clock = pygame.time.Clock()
 
@@ -40,9 +39,7 @@ def main():
             state, _, terminal = env.step(action)
 
             if terminal:
-                state = env.reset()
-
-            state = state
+                state, _, _ = env.reset()
 
             env.render()
 
