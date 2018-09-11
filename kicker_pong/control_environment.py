@@ -110,7 +110,7 @@ class EnvironmentController:
 
     @staticmethod
     def get_random_action():
-        return random.randint(0, 8)
+        return random.randint(0, 2)
 
     def get_goal_counter(self):
         return self.env.get_goal_counter()
